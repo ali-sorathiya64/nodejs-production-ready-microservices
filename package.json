@@ -1,0 +1,22 @@
+{
+  "name": "microservices-stuff",
+  "version": "1.0.0",
+  "privare": true,
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:auth": "npm run dev -w auth-service",
+    "db:migrate": "tsx scripts/db-migrate.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.4"
+  }
+}
