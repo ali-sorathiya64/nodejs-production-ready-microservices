@@ -17,7 +17,7 @@ const app  = express();
 
 app.use(httpLogger);
 app.use(express.json());
-app.use("/api/auth",authRoutes)
+app.use("/auth",authRoutes)
 
 
 app.get("/health",(_req:Request,res:Response)=>{

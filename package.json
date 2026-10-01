@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "dev:auth": "npm run dev -w auth-service",
-    "db:migrate": "tsx scripts/db-migrate.ts"
+    "db:migrate": "tsx scripts/db-migrate.ts",
+    "dev:gateway":"npm run dev -w api-gateway"
   },
   "devDependencies": {
     "tsx": "^4.23.15",

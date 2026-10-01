@@ -21,7 +21,7 @@ export const signToken =(
 
 
 
-    const expiresIn = process.env.JWT_EXPIRES_IN as string
+    const expiresIn = process.env.JWT_EXPIRES_IN;
     
 
 
