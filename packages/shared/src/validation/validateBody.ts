@@ -21,7 +21,5 @@ export function validateBody (schema:ZodSchema){
         next();
     }
 
-
-
     
 }
