@@ -5,7 +5,6 @@ import { AppError, errorHandler, httpLogger, logger, successResponse } from 'sha
 import authRoutes from "./routes/auth.route"
 
 
-
 config({ path: resolve(process.cwd(), ".env") });
 config({ path: resolve(process.cwd(), "../../.env") });
 
