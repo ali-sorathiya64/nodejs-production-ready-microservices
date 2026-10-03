@@ -24,7 +24,6 @@ app.get("/health",(_req:Request,res:Response)=>{
 
 })
 
-
 app.use((_req ,_res ,next)=>{
     next(new AppError(404,"Route Not Found"))
 })
