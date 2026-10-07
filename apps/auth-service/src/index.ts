@@ -5,7 +5,6 @@ import { AppError, errorHandler, httpLogger, logger, successResponse } from 'sha
 import authRoutes from "./routes/auth.route"
 
 
-
 config({ path: resolve(process.cwd(), ".env") });
 config({ path: resolve(process.cwd(), "../../.env") });
 
@@ -24,7 +23,6 @@ app.get("/health",(_req:Request,res:Response)=>{
     successResponse(res, {service:"auth-service"})
 
 })
-
 
 app.use((_req ,_res ,next)=>{
     next(new AppError(404,"Route Not Found"))
