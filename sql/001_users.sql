@@ -3,9 +3,7 @@ CREATE TABLE IF NOT EXISTS users(
     name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
-    role TEXT NOT NULL DEFAULT 'USER' CHECK (role in ('USER','ADMIN')),
+    role TEXT NOT NULL DEFAULT 'USER' CHECK (role in ('USER', 'ADMIN')),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 )
-
-
 
