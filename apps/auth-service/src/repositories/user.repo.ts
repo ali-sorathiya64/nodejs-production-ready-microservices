@@ -10,6 +10,7 @@ export const findByEmail = async(email :string):Promise<User | null>=>{
         `
         SELECT id, name, email,password_hash, role, created_at
         from users where email = $1
+        
         `,
         [email]
     )
