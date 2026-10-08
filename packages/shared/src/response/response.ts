@@ -7,6 +7,8 @@ export const  successResponse =(
     data: unknown,
     statusCode = 200)  => {
 
+
+
     return res.status(statusCode).json({
         success: true,
         data
@@ -14,12 +16,12 @@ export const  successResponse =(
 
 }
 
-
-export const failResponse =(
+export const failResponse = (
     res:Response,
     message:string,
     statusCode = 400
 ) =>{
+
 
 return res.status(statusCode).json({
     success:false,
