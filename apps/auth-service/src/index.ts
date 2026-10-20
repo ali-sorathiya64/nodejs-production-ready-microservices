@@ -20,7 +20,7 @@ app.use("/auth",authRoutes)
 
 
 app.get("/health",(_req:Request,res:Response)=>{
-    successResponse(res, {service:"auth-service"})
+    successResponse(res, {service:"auth_service"})
 
 })
 

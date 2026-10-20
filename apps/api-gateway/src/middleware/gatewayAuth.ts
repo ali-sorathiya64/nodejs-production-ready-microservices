@@ -29,7 +29,7 @@ function attachGatewayRequest(req:Request){
     const gatewaySecret = process.env.GATEWAY_SECERT;
 
     if (!gatewaySecret){
-        throw new AppError(500,"Gateway secret is not defined env")
+        throw new AppError(500,"Gateway secret is not defined in .env")
     }
 
     req.headers['x-gateway-secret'] = gatewaySecret
