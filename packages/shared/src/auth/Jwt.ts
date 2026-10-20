@@ -7,7 +7,7 @@ const extarctJwtSecrt = ()=>{
     const secret = process.env.JWT_SECRET
 
     if (!secret){
-        throw new Error("JWT Secret key is not set")       
+        throw new Error("Jwt Secret key is not set in .env")       
     }
     return secret
 }
