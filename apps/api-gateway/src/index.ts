@@ -6,6 +6,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 import rateLimit, { MINUTE } from 'express-rate-limit';
 import { createProxyMiddleware,fixRequestBody } from 'http-proxy-middleware';
+import { gatewayAuth } from './middleware/gatewayAuth';
 // import dotenv from 'dotenv'
 // dotenv.config();
 
@@ -40,7 +41,9 @@ app.get("/health",(_req,res) =>{
 
 });
 
-app.use("/auth", createProxyMiddleware({
+app.use("/auth", 
+    gatewayAuth,
+    createProxyMiddleware({
     target: AUTH_SERVICE_URL,
     changeOrigin: true,
     pathRewrite: (path) => `/auth${path}`,

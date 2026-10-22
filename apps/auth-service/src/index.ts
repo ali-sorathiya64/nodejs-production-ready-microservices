@@ -1,7 +1,7 @@
 import express,{Request,Response} from 'express';
 import { config } from 'dotenv'
 import { resolve } from 'node:path';
-import { AppError, errorHandler, httpLogger, logger, successResponse } from 'shared';
+import { AppError, errorHandler, httpLogger, logger, requireGatewaySecret, successResponse } from 'shared';
 import authRoutes from "./routes/auth.route"
 
 
@@ -16,7 +16,7 @@ const app  = express();
 
 app.use(httpLogger);
 app.use(express.json());
-app.use("/auth",authRoutes)
+app.use("/auth", requireGatewaySecret ,authRoutes)
 
 
 app.get("/health",(_req:Request,res:Response)=>{

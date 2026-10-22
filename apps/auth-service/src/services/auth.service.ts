@@ -3,7 +3,7 @@ import { createUser, findByEmail, findByUserId } from "../repositories/user.repo
 import { LoginInput, RegisterInput } from "../schemas/auth.schema";
 import bcryptjs from 'bcryptjs'
 import { convertUserFormat } from "../utils/auth.utils";
-import { signToken } from "../utils/jwt.util";
+import { signToken } from "shared";
 
 
 export async function register(input: RegisterInput) {
