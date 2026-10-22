@@ -12,6 +12,8 @@ const IDENTITY_HEADERS = [
 
 
 // trust any headers receive from client --> BIG NO
+// suppose BSC --> :3000/auth/me -H authorization Bearer <user-token>
+//-H --> x-user-if --> demo-user-id
 
 
 
