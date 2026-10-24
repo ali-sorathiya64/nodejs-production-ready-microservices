@@ -40,15 +40,11 @@ export const createUser = async(input:{
 
 
 
-export const findByUserId =async(userId:string): Promise<User | null>=>{
-
+export const findByUserId = async (userId: string): Promise<User | null> => {
     const result = await getPool().query<User>(
-        `
-        SELECT name,email,password_hash,role from users where id =1;
-        `
-        ,[userId]
+        `SELECT id, name, email, password_hash, role, created_at
+         FROM users WHERE id = $1`,
+        [userId]
     )
     return result.rows[0] ?? null;
-
-
 }
