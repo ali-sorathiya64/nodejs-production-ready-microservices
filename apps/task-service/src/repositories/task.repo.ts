@@ -12,6 +12,14 @@ export const createTask =  async(input:{
 
 
 
-    const result = await getPool ().query()
+    const result = await getPool ().query(
+        `
+        INSERT INTO tasks(text,created_by)
+   VALUES($1,$2)
+   RETURNING id, text , status, created_by, created_at, updated_at
+        ` 
+        ,[input.text , input.created_by]
+    )
+    return result.rows[0]
 
 }
