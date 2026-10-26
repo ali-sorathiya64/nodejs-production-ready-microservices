@@ -9,7 +9,7 @@ config({path:resolve(process.cwd(), '.env' )})
 
 
 async function main(){
-    const file = process.argv[2] ?? "sql/001_users.sql"
+    const file = process.argv[2] ?? "sql/001_user.sql"
     const sql = readFileSync(resolve(process.cwd(),file), 'utf-8');
 
 
