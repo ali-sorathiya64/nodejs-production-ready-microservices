@@ -7,4 +7,4 @@ CREATE TABLE IF NOT EXISTS tasks(
     updated_at TIMESTAMPTZ not null DEFAULT NOW()
 );
 
-
+create INDEX IF NOT EXISTS idx_task_created_by ON tasks (created_by);
