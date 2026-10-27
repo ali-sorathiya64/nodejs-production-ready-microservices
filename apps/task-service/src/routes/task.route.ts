@@ -8,5 +8,6 @@ const router = express.Router ();
 
 router.post("/create-task", validateBody(createTaskSchema), taskController.createTask );
 router.get("/list-task",  taskController.listTasks );
+router.get("/task/:id",taskController.getSingleTask);
 
 export default router;

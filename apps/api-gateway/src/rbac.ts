@@ -36,6 +36,11 @@ const rbacRules :RbacRule[]=[
         method:"GET",
         path:"/task/list-task",
         roles:["ADMIN" ,"USER"]
+    },
+    {
+        method:"GET",
+        path:"/task/:id",
+        roles:["ADMIN","USER"]
     }
     
     // ,{

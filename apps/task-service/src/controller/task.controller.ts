@@ -55,3 +55,45 @@ function requireIdentity (req:Request){
         next(err)
     }
  }
+
+ export const getSingleTask = async(
+    req:Request , res:Response, next:NextFunction
+ ) =>{
+
+    try{
+
+        const {userId , role} = requireIdentity(req)
+
+        const id = String(req.params.id)
+
+        const task= await taskService.getSingleTask(userId , role , id )
+
+        successResponse(res ,{task})
+
+    }
+    catch(err:any){
+        next(err)
+    }
+
+ }
+
+ export const deleteTask = async(
+     req:Request , res:Response, next:NextFunction
+ ) =>{
+
+    try{
+
+        const  { role} = requireIdentity(req);
+        const id = String (req.params.id)
+
+
+        const deleteResult =  taskService.taskDelete(role, id)
+
+        successResponse(res,deleteResult)
+
+    }
+    catch(err){
+        next (err)
+
+    }
+ }
