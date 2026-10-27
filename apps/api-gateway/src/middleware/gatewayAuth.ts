@@ -71,7 +71,7 @@ export const gatewayAuth = (
         const token = authHeader.slice("Bearer ".length).trim();
         const payload = verifyToken(token)
 
-        // no rule for this route = unknown route
+       
         const allowedRoles = getAllowedRoles(req.method, path)
 
         if (!allowedRoles) {
@@ -85,6 +85,8 @@ export const gatewayAuth = (
 
         attachUserHeaders(req, payload.userId, payload.role);
         return next();
+
+
     } catch (error) {
         if (error instanceof AppError) {
             return next(error)

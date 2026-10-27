@@ -25,6 +25,14 @@ const rbacRules :RbacRule[]=[
         roles:["USER","ADMIN"]
 
     }
+
+
+    ,{
+        method:"POST",
+        path:"/task/create-task",
+        roles:['USER']
+    }
+    
     // ,{
     //     method:"GET",
     //     path:"/task/delete",

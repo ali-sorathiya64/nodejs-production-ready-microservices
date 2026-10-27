@@ -18,7 +18,7 @@ app.use(express.json());
 
 
 // mount task-routes
-app.use("/api/task", requireGatewaySecret, taskRoute)
+app.use("/task", requireGatewaySecret, taskRoute)
 
 
 
