@@ -1,7 +1,8 @@
 import express from 'express'
 import { config } from 'dotenv'
 import { resolve } from 'node:path'
-import { AppError, errorHandler, httpLogger, logger, successResponse } from 'shared'
+import { AppError, errorHandler, httpLogger, logger, requireGatewaySecret, successResponse } from 'shared'
+import taskRoute from "./routes/task.route"
 
 config({ path: resolve(process.cwd(), ".env") })
 config({ path: resolve(process.cwd(), "../../.env") })
@@ -16,9 +17,9 @@ app.use(httpLogger)
 app.use(express.json());
 
 
-
-
 // mount task-routes
+app.use("/api/task", requireGatewaySecret, taskRoute)
+
 
 
 app.get("/health",(_req,res)=>{

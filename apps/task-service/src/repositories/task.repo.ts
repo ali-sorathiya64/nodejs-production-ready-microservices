@@ -3,22 +3,19 @@ import { TASK, TaskStatus } from "../types/types";
 
 
 export const createTask = async (input: {
-    text: string,
-    status: TaskStatus,
+    title: string,
     created_by: string
-    created_at: Date,
-    updated_at: string
 }): Promise<TASK> => {
 
 
 
     const result = await getPool().query<TASK>(
         `
-        INSERT INTO tasks(text,created_by)
+        INSERT INTO tasks(title,created_by)
    VALUES($1,$2)
-   RETURNING id, text , status, created_by, created_at, updated_at
+   RETURNING id, title , status, created_by, created_at, updated_at
         `
-        , [input.text, input.created_by]
+        , [input.title, input.created_by]
     )
     return result.rows[0]
 
@@ -36,7 +33,7 @@ export const listTask = async (input: {
 
         const result = await getPool().query<TASK>(
             `
-            SELECT id, text, status, created_by, created_at, upadated_at
+            SELECT id, title, status, created_by, created_at, upadated_at
             FROM tasks 
             ORDER BY created_at DESC
             `
@@ -47,7 +44,7 @@ export const listTask = async (input: {
 
     const result = await getPool().query<TASK>(
         ` 
-        SELECT id,text,status,created_by,created_at,updated_at
+        SELECT id,title,status,created_by,created_at,updated_at
         FROM tasks 
         where created_by = $1
         ORDER BY created_at DESC
@@ -60,30 +57,30 @@ export const listTask = async (input: {
 
 }
 
-export const findSingleTaskById = async( id :string)  : Promise<TASK | null>=>{
+export const findSingleTaskById = async (id: string): Promise<TASK | null> => {
 
-    const result = await  getPool().query(
+    const result = await getPool().query(
         `
-        SELECT id , text, status, created_by, created_at, updated_at
+        SELECT id , title, status, created_by, created_at, updated_at
         FROM tasks
         WHERE id = $1
         `
-        ,[id]
+        , [id]
     )
     return result.rows[0] ?? null;
 
 }
 
 
-export const deleteSingleTaskById  = async (id:string):Promise<boolean>=>{
+export const deleteSingleTaskById = async (id: string): Promise<boolean> => {
 
-    const result = await getPool ().query(
+    const result = await getPool().query(
         `
         DELETE FROM  tasks 
         WHERE id = $1
-        `,[id]
+        `, [id]
     )
 
-    return  ( result.rowCount  ?? 0) >0;
+    return (result.rowCount ?? 0) > 0;
 
 }
