@@ -7,5 +7,6 @@ import * as taskController from "../controller/task.controller"
 const router = express.Router ();
 
 router.post("/create-task", validateBody(createTaskSchema), taskController.createTask );
+router.get("/list-task",  taskController.listTasks );
 
 export default router;

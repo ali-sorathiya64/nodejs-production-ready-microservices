@@ -17,6 +17,8 @@ function requireIdentity (req:Request){
 }
 
 
+
+
  export async function  createTask (req:Request , res:Response, next:NextFunction){
 
 
@@ -34,4 +36,22 @@ function requireIdentity (req:Request){
         next ( error)
     }
 
+ }
+
+ export const listTasks  = async(req:Request , res:Response, next:NextFunction) =>{
+
+
+    try{
+
+        const {userId , role} = requireIdentity(req);
+
+        const list = await taskService.listTasks(userId,role)
+
+        successResponse(res,{list})
+
+
+    }
+    catch(err:any){
+        next(err)
+    }
  }
