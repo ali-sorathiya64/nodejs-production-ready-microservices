@@ -71,6 +71,24 @@ export const findSingleTaskById = async (id: string): Promise<TASK | null> => {
 
 }
 
+export const updateTask =  async( input :{
+    id :string , 
+    title:string
+})  :Promise <TASK>=>{
+
+    const result = await getPool().query(
+        `
+        UPDATE tasks
+        SET title = $1, updated_at = NOW()
+        WHERE id = $2
+        RETURNING id, title, status, created_by, created_at, updated_at
+         
+        ` , [input.title , input.id]
+    )
+    return result.rows[0]
+
+}
+
 
 export const deleteSingleTaskById = async (id: string): Promise<boolean> => {
 

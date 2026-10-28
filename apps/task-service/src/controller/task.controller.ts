@@ -66,7 +66,7 @@ function requireIdentity (req:Request){
 
         const id = String(req.params.id)
 
-        const task= await taskService.getSingleTask(userId , role , id )
+        const task= await taskService.getSingleTask(userId , role , id  )
 
         successResponse(res ,{task})
 
@@ -74,6 +74,32 @@ function requireIdentity (req:Request){
     catch(err:any){
         next(err)
     }
+
+ }
+
+ export const updateTask = async(req:Request , res:Response, next:NextFunction) =>{
+
+
+    try{
+
+        const {userId , role}  = requireIdentity(req);
+        const id = String(req.params.id)
+        const {title} = req.body
+
+        const task = taskService.updateTask({
+            userId,
+            role,
+            id,
+            title
+        }) 
+         successResponse(res, { task })
+    
+
+    }
+    catch(err:any){
+        next(err)
+    }
+
 
  }
 

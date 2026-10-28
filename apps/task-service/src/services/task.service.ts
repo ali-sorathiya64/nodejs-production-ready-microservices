@@ -53,6 +53,34 @@ return convertTaskFormat(task)
 
 }
 
+export const updateTask =async ( input :{
+    userId: string;
+    role: string;
+    id: string;
+    title: string;
+}
+) =>{
+const task  :any= await taskRepo.findSingleTaskById(input.id);
+
+ if (input.role !== 'ADMIN' || task.created_by !== input.userId ) {
+      throw new AppError(403,"Forbidden you dont have access")
+    }
+   
+
+
+    const update = await taskRepo.updateTask( {
+        title:input.title,
+        id :input.id
+    }) 
+
+
+    if (!update){
+        throw new AppError(404,"Task not found")
+    }
+
+    return convertTaskFormat (update);
+}
+
 
 export const taskDelete =  async ( role :string ,id:string) =>{
 
