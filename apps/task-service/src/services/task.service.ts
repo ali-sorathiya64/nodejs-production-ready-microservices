@@ -65,12 +65,11 @@ const task  :any= await taskRepo.findSingleTaskById(input.id);
  if (input.role !== 'ADMIN' || task.created_by !== input.userId ) {
       throw new AppError(403,"Forbidden you don't have access")
     }
-   
-
 
     const update = await taskRepo.updateTask( {
+        id :input.id,
         title:input.title,
-        id :input.id
+        
     }) 
 
 
