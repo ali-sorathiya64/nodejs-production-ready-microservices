@@ -63,7 +63,7 @@ export const updateTask =async ( input :{
 const task  :any= await taskRepo.findSingleTaskById(input.id);
 
  if (input.role !== 'ADMIN' || task.created_by !== input.userId ) {
-      throw new AppError(403,"Forbidden you dont have access")
+      throw new AppError(403,"Forbidden you don't have access")
     }
    
 
@@ -91,8 +91,8 @@ export const taskDelete =  async ( role :string ,id:string) =>{
 
      const task = await taskRepo.findSingleTaskById(id);
 
-     if ( ! task){
-        throw new AppError(404,"Task not found")
+     if (!task){
+        throw new AppError(404,"Task  does not found")
      }
 
      await taskRepo.deleteSingleTaskById(id);
