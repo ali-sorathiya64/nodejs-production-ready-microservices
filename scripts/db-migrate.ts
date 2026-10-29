@@ -6,10 +6,8 @@ import {closePool, getPool} from '../packages/shared/src/db/pool'
 
 config({path:resolve(process.cwd(), '.env' )})
 
-
-
 async function main(){
-    const file = process.argv[2] ?? "sql/run-sql.sql"
+    const file = process.argv[2] ?? "sql/003_attachment.sql"
     const sql = readFileSync(resolve(process.cwd(),file), 'utf-8');
 
 
