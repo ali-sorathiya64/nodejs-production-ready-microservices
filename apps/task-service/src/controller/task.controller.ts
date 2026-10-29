@@ -86,7 +86,7 @@ function requireIdentity (req:Request){
         const id = String(req.params.id)
         const {title} = req.body
 
-        const task = taskService.updateTask({
+        const task = await taskService.updateTask({
             userId,
             role,
             id,
@@ -113,7 +113,7 @@ function requireIdentity (req:Request){
         const id = String (req.params.id)
 
 
-        const deleteResult =  taskService.taskDelete(role, id)
+        const deleteResult =  await taskService.taskDelete(role, id)
 
         successResponse(res,deleteResult)
 

@@ -26,7 +26,6 @@ const rbacRules :RbacRule[]=[
 
     }
 
-
     ,{
         method:"POST",
         path:"/task/create-task",
@@ -41,7 +40,19 @@ const rbacRules :RbacRule[]=[
         method:"GET",
         path:"/task/:id",
         roles:["ADMIN","USER"]
-    }
+    },
+
+
+   { method: "PUT", 
+     path: "/task/:id",     
+    roles: ["USER", "ADMIN"] 
+},
+
+{ 
+    method: "DELETE", 
+    path: "/task/:id",    
+     roles: ["ADMIN"] 
+    },
     
     // ,{
     //     method:"GET",
