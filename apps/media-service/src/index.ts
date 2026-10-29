@@ -15,10 +15,9 @@ const app = express();
 
 app.use(httpLogger);
 
-//  todo mount routes of media
 
 app.get("/health" , (_req,res,) =>{
-    successResponse(res,{service:'media-service'})
+    successResponse(res,{service:'Media-Service'})
 });
 
 
