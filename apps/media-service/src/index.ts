@@ -16,13 +16,15 @@ const app = express();
 app.use(httpLogger);
 
 
+//mount media service routes here
+
 app.get("/health" , (_req,res,) =>{
     successResponse(res,{service:'Media-Service'})
 });
 
 
 app.use((_req,_res,next) =>{
-    new AppError(404 ,"Route Not found")
+    next (new AppError(404,'Route Not found'))
 })
 
 app.use(errorHandler)
