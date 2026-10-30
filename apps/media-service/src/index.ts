@@ -17,7 +17,6 @@ app.use(httpLogger);
 
 
 //mount media service routes here
-
 app.get("/health" , (_req,res,) =>{
     successResponse(res,{service:'Media-Service'})
 });
