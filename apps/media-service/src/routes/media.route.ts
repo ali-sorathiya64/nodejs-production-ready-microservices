@@ -31,5 +31,10 @@ function handleUpload(req: Request, res: Response, next: NextFunction) {
 
 
 //this is the url of the corresponding route --> http://localhost:300/tasks/:id/attachment
+router.post("/:taskId/attachments" ,
+     handleUpload,
+     attachmentController.uploadAttachment)
 
-router.post("/:taskId/attachments")
+
+
+export default router;

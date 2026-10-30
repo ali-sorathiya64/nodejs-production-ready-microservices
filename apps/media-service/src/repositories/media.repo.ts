@@ -2,6 +2,27 @@ import { getPool } from "shared"
 import { Atachment } from "../utils/types"
 
 
+
+export  async function findTaskAccess (taskId:string)  : Promise<{
+    id:string;
+    created_by:string
+}| null> {
+
+    const result = await getPool().query <{id:string , created_by:string}>(
+
+        `
+        SELECT id , created_by from tasks where id =$1
+        `,
+        [taskId]
+    )
+
+
+    return result.rows[0] ?? null;
+}
+
+
+
+
 export async function createAttachment(input:{
     taskId:string,
     imageUrl:string,

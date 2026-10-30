@@ -5,7 +5,7 @@ import { AppError } from 'shared';
 
 
 
-export const requireIdentity =(req:Request) =>{
+ const requireIdentity =(req:Request) =>{
 
 
     const userId = req.header("x-user-id");
@@ -31,7 +31,7 @@ try{
     const taskId = String(req.params.taskId)
 
 
-    const attachment = await mediaService.
+    
 
   
 
