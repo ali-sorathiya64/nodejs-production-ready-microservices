@@ -1,7 +1,8 @@
 
 
 import {Request,Response,NextFunction} from 'express'
-import { AppError } from 'shared';
+import { AppError, successResponse } from 'shared';
+import * as attachmentService from '../services/media.service'
 
 
 
@@ -19,6 +20,10 @@ import { AppError } from 'shared';
 
 
 
+
+
+
+
 export const uploadAttachment =  async(
     req:Request,
     res:Response,
@@ -31,10 +36,17 @@ try{
     const taskId = String(req.params.taskId)
 
 
+    const attachment = await attachmentService.uploadAttachment(
+        {
+        taskId,
+        userId,
+        role,
+        file:req.file
     
+        }
+    )
 
-  
-
+    successResponse(res,{attachment},201)
 
 
     }

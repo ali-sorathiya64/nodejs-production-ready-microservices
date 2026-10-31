@@ -1,8 +1,8 @@
 import express from 'express'
 import {config} from  'dotenv'
 import { resolve } from 'node:path'
-import { AppError, errorHandler, httpLogger, logger, successResponse } from 'shared';
-
+import { AppError, errorHandler, httpLogger, logger, requireGatewaySecret, successResponse } from 'shared';
+import attachmentRoutes from "./routes/media.route"
 
 config({path:resolve(process.cwd(),',env')});
 config({path:resolve(process.cwd() ,'../../.env')});
@@ -16,10 +16,12 @@ const app = express();
 app.use(httpLogger);
 
 
-//mount media service routes here
 app.get("/health" , (_req,res,) =>{
     successResponse(res,{service:'Media-Service'})
 });
+
+
+app.use("/tasks" , requireGatewaySecret, attachmentRoutes)
 
 
 app.use((_req,_res,next) =>{

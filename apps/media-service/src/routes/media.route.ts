@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express'
 import { Router } from 'express'
-import * as attachmentController from '../controllers/media.controller'
+import * as attachmentController from '../controller/media.controller'
 import { uploadImage } from '../middleware/upload.middleware';
 import { AppError } from 'shared';
 
