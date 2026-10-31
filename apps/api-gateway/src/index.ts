@@ -21,6 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL || "http://localhost:3001"
 const TASK_SERVICE_URL = process.env.TASK_SERVICE_URL || "http://localhost:3002"
+const MEDIA_SERVICE_URL = process.env.MEDIA_SERVICE_URL || "http://localhost:3003"
 
 
 
@@ -65,6 +66,20 @@ app.use ("/task" ,
         }
     })
 )
+
+app.use("/tasks",
+    gatewayAuth,
+    createProxyMiddleware({
+        target:MEDIA_SERVICE_URL,
+        changeOrigin:true,
+        pathRewrite:(path) => `/tasks${path}`,
+        on:{
+             proxyReq:fixRequestBody
+        }
+    })
+)
+
+
 
 app.use((_req,_res,next)=>{
     next(new AppError(404,"Route not found"))

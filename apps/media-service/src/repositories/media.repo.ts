@@ -31,15 +31,14 @@ export async function createAttachment(input:{
 
 }) :Promise<Atachment> {
 
-    const result = await getPool().query<Atachment>(
-        `
-
-        INSERT INTO attchments (task_id,imageUrl,publicId,uploadedBy)
-        VALUES ($1,$2,$3,$4)
-        RETURNING id , task_id, image_url,public_id,uploaded_by,created_at
-        `,
-        [input.taskId,input.publicId,input.imageUrl,input.uploadedBy]
-    )
+  const result = await getPool().query<Atachment>(
+    `
+    INSERT INTO attachments (task_id, image_url, public_id, uploaded_by)
+    VALUES ($1, $2, $3, $4)
+    RETURNING id, task_id, image_url, public_id, uploaded_by, created_at
+    `,
+    [input.taskId, input.imageUrl, input.publicId, input.uploadedBy]
+)
 
     return result.rows[0];
 
