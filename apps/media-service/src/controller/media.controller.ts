@@ -56,3 +56,29 @@ try{
 
 
 }
+
+
+export const listAttachmentsController =  async ( 
+    req:Request,
+    res:Response,
+    next:NextFunction
+) =>{
+    try{
+
+        const {userId, role} = requireIdentity(req)
+  const taskId= String (req.params.taskId);
+
+  const extractAttachment = await attachmentService.listAttachment(  taskId, role,userId
+  )
+
+  successResponse(res,{extractAttachment});
+
+
+
+
+    }
+
+    catch(err){
+        next(err);
+    }
+}

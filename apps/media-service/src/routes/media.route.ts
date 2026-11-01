@@ -35,6 +35,9 @@ router.post("/:taskId/attachments" ,
      handleUpload,
      attachmentController.uploadAttachment)
 
+router.get("/:taskId/attachments" , 
+    attachmentController.listAttachmentsController)
+
 
 
 export default router;

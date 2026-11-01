@@ -4,7 +4,7 @@ import { uploadBuffer } from "../utils/storage";
 import { convertToPublicAttachmentFormat } from "../utils/attachment.util";
 
 
-const asserTaskAccess =async (
+const assertTaskAccess =async (
     taskId: string,
     userId: string,
     role: string
@@ -36,7 +36,7 @@ export async function uploadAttachment(input: {
         throw new AppError(404, " Image file is required");
     }
 
-     await asserTaskAccess(input.taskId, input.userId, input.role)
+     await assertTaskAccess(input.taskId, input.userId, input.role)
 
      const uploaded = await uploadBuffer(
         input.file.buffer,
@@ -56,5 +56,21 @@ export async function uploadAttachment(input: {
 
 
 
+
+}
+
+export const listAttachment= async(
+    taskId:string,
+    role:string,
+    userId:string
+) =>{
+
+
+    await assertTaskAccess(taskId,userId,role);
+
+
+    const rows = await attachmentRepo.listMedia(taskId);
+
+    return rows.map(convertToPublicAttachmentFormat);
 
 }

@@ -43,3 +43,21 @@ export async function createAttachment(input:{
     return result.rows[0];
 
 }
+
+
+
+export const listMedia = async(taskId:string) : Promise <Atachment[]>=>{
+
+    const result = await getPool().query<Atachment>(
+        `
+        SELECT id, task_id, image_url, public_id, uploaded_by, created_at
+        FROM attachments
+        WHERE id = $1
+        ORDER BY created_at DESC
+        `,
+        [taskId]
+    )
+
+    return result.rows
+
+}

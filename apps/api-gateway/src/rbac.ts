@@ -1,65 +1,73 @@
 import { UserRole } from "shared"
 
-export type RbacRule ={
-    method:string,
-    path:string,
-    roles:UserRole[]
+export type RbacRule = {
+    method: string,
+    path: string,
+    roles: UserRole[]
 }
 
-export const publicRoute =[
+export const publicRoute = [
     {
-        method:"POST",
-        path:"/auth/register"
+        method: "POST",
+        path: "/auth/register"
     },
     {
-        method:"POST",
-        path:"/auth/login"
+        method: "POST",
+        path: "/auth/login"
     }
 ] as const;
 
 
-const rbacRules :RbacRule[]=[
+const rbacRules: RbacRule[] = [
     {
-        method:"GET",
-        path:"/auth/get-me",
-        roles:["USER","ADMIN"]
+        method: "GET",
+        path: "/auth/get-me",
+        roles: ["USER", "ADMIN"]
 
     }
 
-    ,{
-        method:"POST",
-        path:"/task/create-task",
-        roles:["USER" ,"ADMIN"]
+    , {
+        method: "POST",
+        path: "/task/create-task",
+        roles: ["USER", "ADMIN"]
     },
     {
-        method:"GET",
-        path:"/task/list-task",
-        roles:["ADMIN" ,"USER"]
+        method: "GET",
+        path: "/task/list-task",
+        roles: ["ADMIN", "USER"]
     },
     {
-        method:"GET",
-        path:"/task/:id",
-        roles:["ADMIN","USER"]
+        method: "GET",
+        path: "/task/:id",
+        roles: ["ADMIN", "USER"]
     },
 
 
-   { method: "PUT", 
-     path: "/task/:id",     
-    roles: ["USER", "ADMIN"] 
-},
-
-{ 
-    method: "DELETE", 
-    path: "/task/:id",    
-     roles: ["ADMIN"] 
+    {
+        method: "PUT",
+        path: "/task/:id",
+        roles: ["USER", "ADMIN"]
     },
 
-    { 
-    method: "POST",    
-    path: "/tasks/:taskId/attachments",
-     roles: ["USER","ADMIN"] 
+    {
+        method: "DELETE",
+        path: "/task/:id",
+        roles: ["ADMIN"]
     },
-    
+
+    {
+        method: "POST",
+        path: "/tasks/:taskId/attachments",
+        roles: ["USER", "ADMIN"]
+    },
+    {
+        method: "GET",
+        path: "/tasks/:taskId/attachments",
+        roles: ["USER", "ADMIN"]
+    }
+
+
+
     // ,{
     //     method:"GET",
     //     path:"/task/delete",
@@ -67,8 +75,8 @@ const rbacRules :RbacRule[]=[
     // }
 ]
 
-function matchPath (pattern :string ,actual :string ) :boolean  {
-    if (pattern === actual){
+function matchPath(pattern: string, actual: string): boolean {
+    if (pattern === actual) {
         return true
     }
 
@@ -76,34 +84,34 @@ function matchPath (pattern :string ,actual :string ) :boolean  {
     const actualParts = actual.split("/");
 
 
-    if (patternParts.length !== actualParts.length){
+    if (patternParts.length !== actualParts.length) {
         return false;
     }
     return patternParts.every(
-        (part,index)=> part.startsWith(":") || part === actualParts[index]
+        (part, index) => part.startsWith(":") || part === actualParts[index]
 
-       
+
     )
 
 }
 
 
-export const isPublicRoute =(method :string ,path:string) :boolean=>{
+export const isPublicRoute = (method: string, path: string): boolean => {
 
 
     return publicRoute.some(
-        (route) => route.method === method && matchPath(route.path,path)
+        (route) => route.method === method && matchPath(route.path, path)
     )
 
 }
 
-export const getAllowedRoles =(method:string,  path :string):UserRole[] | null=>{
+export const getAllowedRoles = (method: string, path: string): UserRole[] | null => {
 
     const rule = rbacRules.find(
-        (currentItem) => currentItem.method === method && 
-        matchPath(currentItem.path,path)
+        (currentItem) => currentItem.method === method &&
+            matchPath(currentItem.path, path)
     )
 
-    return rule?.roles  ?? null
+    return rule?.roles ?? null
 
 }
