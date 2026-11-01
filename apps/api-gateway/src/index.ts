@@ -1,14 +1,13 @@
-import express,{Request,Response} from 'express'
+import express from 'express'
 import { config } from "dotenv";
 import {resolve} from 'node:path'
 import { AppError, errorHandler, httpLogger, logger, successResponse } from "shared";
 import helmet from 'helmet'
 import cors from 'cors'
-import rateLimit, { MINUTE } from 'express-rate-limit';
+import rateLimit from 'express-rate-limit';
 import { createProxyMiddleware,fixRequestBody } from 'http-proxy-middleware';
 import { gatewayAuth } from './middleware/gatewayAuth';
-// import dotenv from 'dotenv'
-// dotenv.config();
+
 
 
 
@@ -39,7 +38,7 @@ app.use(httpLogger);
 
 app.get("/health",(_req,res) =>{
     successResponse(res,{
-        service:'api-gateway'
+        service:'API-GATEWAY'
     })
 
 });
