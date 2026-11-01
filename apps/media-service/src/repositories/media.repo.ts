@@ -1,8 +1,6 @@
 import { getPool } from "shared"
 import { Atachment } from "../utils/types"
 
-
-
 export  async function findTaskAccess (taskId:string)  : Promise<{
     id:string;
     created_by:string
@@ -19,7 +17,6 @@ export  async function findTaskAccess (taskId:string)  : Promise<{
 
     return result.rows[0] ?? null;
 }
-
 
 
 

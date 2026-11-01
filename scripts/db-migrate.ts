@@ -13,7 +13,7 @@ async function main(){
 
     const pool = getPool();
     await pool.query(sql);
-    console.log(`Migrated Stuff: ${file}`);
+    console.log(`Migrated file : ${file}`);
 
     await closePool();
 
