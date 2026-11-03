@@ -1,7 +1,7 @@
 import { Kafka, logLevel, type KafkaConfig } from "kafkajs";
 import { boolean } from "zod";
 
-export const kafkaClient  =(
+export const createKafkaClient  =(
     clientId:string,
     config :Partial<KafkaConfig> ={}
 )=>{
