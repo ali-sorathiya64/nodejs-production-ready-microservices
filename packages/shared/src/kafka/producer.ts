@@ -24,3 +24,28 @@ export const createProducer = async (clientId: string): Promise<Producer> => {
 
 
 }
+
+
+
+export const publishJsonSafe = async(producer:Producer | null,
+    topic:string,
+    payload : Record<string,unknown>,
+    key ?:string
+) :Promise <void>=>{
+
+    if  (!producer){
+
+        logger.warn({topic} , "Kafka producer is not empty")
+        return
+    }
+
+
+    try{
+
+    }
+
+    catch(err){
+        logger.error({err,topic}, "Kafka publish failed")
+    }
+
+}
