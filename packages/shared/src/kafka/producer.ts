@@ -1,4 +1,4 @@
-import type { Producer } from "kafkajs";
+import type { Producer, RecordMetadata } from "kafkajs";
 import { createKafkaClient } from "./client";
 import { logger } from "../logger/logger";
 
@@ -26,6 +26,30 @@ export const createProducer = async (clientId: string): Promise<Producer> => {
 }
 
 
+export const publishJson = async(
+    prouducer:Producer,
+    topic:string,
+    payload :Record<string,unknown>,
+    key ? :string
+
+) :Promise<RecordMetadata[]>=>{
+
+const result = await prouducer.send({
+    topic,
+    messages:[
+        {
+            key: key ?? null,
+            value :JSON.stringify(payload)
+        }
+    ]
+})
+logger.info({topic,payload}, "Kafka event published")
+
+return result;
+
+}
+
+
 
 export const publishJsonSafe = async(producer:Producer | null,
     topic:string,
@@ -41,6 +65,8 @@ export const publishJsonSafe = async(producer:Producer | null,
 
 
     try{
+
+        await publishJson(producer,topic,payload,key)
 
     }
 

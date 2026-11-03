@@ -3,6 +3,7 @@ import { config } from 'dotenv'
 import { resolve } from 'node:path'
 import { AppError, errorHandler, httpLogger, logger, requireGatewaySecret, successResponse } from 'shared'
 import taskRoute from "./routes/task.route"
+import { initKafka } from './kafka'
 
 config({ path: resolve(process.cwd(), ".env") })
 config({ path: resolve(process.cwd(), "../../.env") })
@@ -33,7 +34,21 @@ app.use((_req,_res,next)=>{
 app.use(errorHandler)
 
 
+async function initStartUp (){
+    try{
 
-app.listen(PORT, () => {
+        await initKafka()
+
+    }
+    catch(err){
+        logger.error({err},"Kafka producer init failed")
+    }
+
+    app.listen(PORT, () => {
     logger.info(`Task service is running on : ${PORT}`)
 })
+}
+
+
+
+initStartUp();

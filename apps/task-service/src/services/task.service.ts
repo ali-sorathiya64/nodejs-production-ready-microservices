@@ -4,6 +4,7 @@ import { createTaskInput } from "../schemas/task.schema";
 import * as taskRepo from "../repositories/task.repo"
 import { convertTaskFormat } from "../utils/task.util";
 import { AppError } from "shared";
+import { publishTaskEvent } from "../kafka";
 
 
 export const createTask = async (input: createTaskInput, userId: string) => {
@@ -16,6 +17,8 @@ export const createTask = async (input: createTaskInput, userId: string) => {
 
     // publish one event here saying ok now we jsut created one task
 
+
+    await publishTaskEvent(newlyCreatedTask.id,userId)
 
     return convertTaskFormat(newlyCreatedTask)
 
