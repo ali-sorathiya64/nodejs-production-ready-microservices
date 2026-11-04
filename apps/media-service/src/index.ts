@@ -3,6 +3,7 @@ import {config} from  'dotenv'
 import { resolve } from 'node:path'
 import { AppError, errorHandler, httpLogger, logger, requireGatewaySecret, successResponse } from 'shared';
 import attachmentRoutes from "./routes/media.route"
+import { initKafka } from './kafka';
 
 config({path:resolve(process.cwd(),'.env')});
 config({path:resolve(process.cwd() ,'../../.env')});
@@ -30,7 +31,21 @@ app.use((_req,_res,next) =>{
 
 app.use(errorHandler)
 
-app.listen(PORT , () =>{
+
+async function initStartuUp (){
+    try{
+        await initKafka()
+
+    }
+    catch(err){
+        logger.error({err}, "Kafka producer init failed")
+    }
+    app.listen(PORT , () =>{
     logger.info(`Media Service is running on ${PORT}`)
 })
+
+}
+
+
+initStartuUp();
 

@@ -2,6 +2,7 @@ import { AppError } from "shared";
 import * as attachmentRepo from "../repositories/media.repo"
 import { uploadBuffer } from "../utils/storage";
 import { convertToPublicAttachmentFormat } from "../utils/attachment.util";
+import { publishAttachmentEvent } from "../kafka";
 
 
 const assertTaskAccess =async (
@@ -52,7 +53,11 @@ export async function uploadAttachment(input: {
      }
 
      )
-     return convertToPublicAttachmentFormat(attachment)
+
+ //  we have to publish an event here 
+ await publishAttachmentEvent(input.taskId,input.userId)
+
+ return convertToPublicAttachmentFormat(attachment)
 
 
 
