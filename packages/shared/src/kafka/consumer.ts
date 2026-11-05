@@ -24,13 +24,13 @@ export const runConsumer = async (
     consumer: Consumer,
     topics: string[],
     handler: (payload: EachMessagePayload) => Promise<void>,
-    options: { fromBeginning?: boolean }
+    options? : { fromBeginning?: boolean }
 ): Promise<void> => {
 
 
     await consumer.subscribe  ({
         topics,
-        fromBeginning:options.fromBeginning ??false
+        fromBeginning:options?.fromBeginning ??false
     })
 
     await consumer.run({
@@ -42,7 +42,10 @@ export const runConsumer = async (
                 partition,
                 offset:message.offset,
                 key:message?.key?.toString()
-            })
+            },
+            "Kakfka message received"
+        )
+        await handler(payload)
         }
     })
 

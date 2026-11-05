@@ -14,7 +14,7 @@
     "dev:media": "npm run dev -w media-service",
     "db:migrate": "tsx scripts/db-migrate.ts",
     "dev:gateway": "npm run dev -w api-gateway",
-    "dev:worflow" :"npm run dev -w workflow-service",
+    "dev:workflow" :"npm run dev -w workflow-service",
     "kafka:up": "docker compose -f docker/docker-compose.yml up -d",
     "kafka:down": "docker compose -f docker/docker-compose.yml down",
     "kafka:logs": "docker compose -f docker/docker-compose.yml logs -f kafka"

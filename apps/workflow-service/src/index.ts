@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { resolve } from "node:path";
 import express from 'express'
 import { AppError, errorHandler, httpLogger, logger, successResponse } from "shared";
+import { startKafka } from "./services/workflow.service";
 
 config({ path: resolve(process.cwd(), '.env') })
 config({ path: resolve(process.cwd(), "../../.env") })
@@ -31,6 +32,21 @@ next(new AppError(404,"Route not found"));
 app.use(errorHandler)
 
 
+async function initStartup(){
+    try{
+
+        await startKafka();
+    }
+    catch(err){
+        logger.error({err},"Kafka consumer init failed")
+    }
+    
 app.listen(PORT , ()=>{
     logger.info(`Workflow service is running on : ${PORT}`)
-})
+});
+
+}
+
+initStartup();
+
+
