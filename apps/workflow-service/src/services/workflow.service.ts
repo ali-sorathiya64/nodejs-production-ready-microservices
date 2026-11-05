@@ -72,7 +72,7 @@ export const listTaskWorflowsById =async(
         throw new AppError(404,"Task not found")
     }
 
-    if (role! == "ADMIN" && task.created_by !== userId)  {
+    if (role !== "ADMIN" && task.created_by !== userId)  {
         throw new AppError(404,'Forbidden')
     }
   

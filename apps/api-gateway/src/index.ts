@@ -77,12 +77,12 @@ app.use("/tasks",
     })
 )
 
-app.use("/tasks",
+app.use("/task-workflow",
     gatewayAuth,
     createProxyMiddleware({
         target:WORKFLOW_SERVICE_URL,
         changeOrigin:true,
-        pathRewrite:(wpath)=> `tasks${wpath}`,
+        pathRewrite:(wpath)=> `/task-workflow${wpath}`,
         on:{
             proxyReq:fixRequestBody
         }

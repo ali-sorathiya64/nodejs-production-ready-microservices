@@ -21,7 +21,7 @@ function handleUpload(req: Request, res: Response, next: NextFunction) {
             err !== null &&
             "code" in err && err.code === "LIMIT_FILE_SIZE") {
 
-            return next(new AppError(400, "Image must be 1mb or smaller"))
+            return next(new AppError(413, "Image must be 10mb or smaller"))
         }
         return next (new AppError(400,"Invalid image upload"))
     })

@@ -30,7 +30,7 @@ export const getWorkFlowByTaskId = async (taskId:string):Promise<WorkFlow[]> =>{
         `
         SELECT id, task_id, event_type, message, created_by, created_at
         FROM task_workflows 
-        WHERE id = $1
+        WHERE task_id = $1
         ORDER BY created_at DESC;
         ` ,[taskId]
     )

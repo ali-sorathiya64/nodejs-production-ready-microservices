@@ -33,7 +33,7 @@ export const listTask = async (input: {
 
         const result = await getPool().query<TASK>(
             `
-            SELECT id, title, status, created_by, created_at, upadated_at
+            SELECT id, title, status, created_by, created_at, updated_at
             FROM tasks 
             ORDER BY created_at DESC
             `

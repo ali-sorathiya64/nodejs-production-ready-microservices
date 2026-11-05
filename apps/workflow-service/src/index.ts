@@ -17,8 +17,7 @@ app.use(httpLogger);
 app.use(express.json())
 
 
-
-app.use("/tasks",requireGatewaySecret,worflowRoutes)
+app.use("/task-workflow",requireGatewaySecret,worflowRoutes)
 
 
 app.get("/health",(_req,res)=>{
