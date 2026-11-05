@@ -1,3 +1,4 @@
+import { get } from "node:http";
 import { UserRole } from "shared"
 
 export type RbacRule = {
@@ -64,8 +65,11 @@ const rbacRules: RbacRule[] = [
         method: "GET",
         path: "/tasks/:taskId/attachments",
         roles: ["USER", "ADMIN"]
+    },{
+        method:"GET",
+        path:"tasks/:taskId/workflows",
+        roles:["USER","ADMIN"]
     }
-
 
 
     // ,{

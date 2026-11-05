@@ -1,8 +1,9 @@
 import { config } from "dotenv";
 import { resolve } from "node:path";
 import express from 'express'
-import { AppError, errorHandler, httpLogger, logger, successResponse } from "shared";
+import { AppError, errorHandler, httpLogger, logger, requireGatewaySecret, successResponse } from "shared";
 import { startKafka } from "./services/workflow.service";
+import worflowRoutes from "./routes/workflow.route"
 
 config({ path: resolve(process.cwd(), '.env') })
 config({ path: resolve(process.cwd(), "../../.env") })
@@ -17,7 +18,7 @@ app.use(express.json())
 
 
 
-//mount routes todo
+app.use(requireGatewaySecret,worflowRoutes)
 
 
 app.get("/health",(_req,res)=>{

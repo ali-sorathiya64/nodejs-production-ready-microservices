@@ -1,6 +1,7 @@
-import { createConsumer, logger, runConsumer, TOPICS } from "shared"
+import { AppError, createConsumer, logger, runConsumer, TOPICS } from "shared"
 import { DomainEvent } from "../utils/types";
 import * as workflowsRepo from "../repositories/workflow.repo"
+import { ConverToPublicFWorflow } from "../utils/workflows.util";
 
 
 
@@ -55,5 +56,30 @@ export const startKafka = async () => {
         }
     )
 
+
+}
+
+
+export const listTaskWorflowsById =async(
+    userId:string,
+    role:string,
+    taskId:string
+)=>{
+
+    const task = await workflowsRepo.findTaskOwner(taskId);
+
+    if (!task){
+        throw new AppError(404,"Task not found")
+    }
+
+    if (role! == "ADMIN" && task.created_by !== userId)  {
+        throw new AppError(404,'Forbidden')
+    }
+  
+    const list = await workflowsRepo.getWorkFlowByTaskId(taskId);
+
+
+
+    return list.map(ConverToPublicFWorflow)
 
 }

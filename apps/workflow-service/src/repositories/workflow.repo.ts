@@ -23,3 +23,31 @@ export const  createWorkFlow = async ( input:{
     return result.rows[0];
 
 }
+
+export const getWorkFlowByTaskId = async (taskId:string):Promise<WorkFlow[]> =>{
+
+    const result = await getPool ().query<WorkFlow>(
+        `
+        SELECT id, task_id, event_type, message, created_by, created_at
+        FROM task_workflows 
+        WHERE id = $1
+        ORDER BY created_at DESC;
+        ` ,[taskId]
+    )
+
+    return result.rows
+}
+
+
+export const findTaskOwner  = async (taskId :string) 
+:Promise<{created_by:string | null}> =>{
+
+    const result = await getPool().query<{created_by:string | null}>(
+        `
+        SELECT created_by from tasks
+        WHERE id =$1
+
+        `,[taskId]
+    )
+    return result.rows [0]  ?? null;
+}
