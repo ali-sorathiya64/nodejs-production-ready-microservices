@@ -82,7 +82,7 @@ app.use("/task-workflow",
     createProxyMiddleware({
         target:WORKFLOW_SERVICE_URL,
         changeOrigin:true,
-        pathRewrite:(wpath)=> `/task-workflow${wpath}`,
+        pathRewrite:(path)=> `/task-workflow${path}`,
         on:{
             proxyReq:fixRequestBody
         }

@@ -18,7 +18,7 @@ app.use(httpLogger)
 app.use(express.json());
 
 
-// mount task-routes
+
 app.use("/task", requireGatewaySecret, taskRoute)
 
 

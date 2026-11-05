@@ -15,4 +15,4 @@ export const uploadImage = multer({
         
     }
 
-}).single("image") // --> field name we need to use !
+}).single("image") // --> field name we have to use

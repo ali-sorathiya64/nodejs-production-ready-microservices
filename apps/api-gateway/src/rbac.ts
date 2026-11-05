@@ -72,11 +72,6 @@ const rbacRules: RbacRule[] = [
     }
 
 
-    // ,{
-    //     method:"GET",
-    //     path:"/task/delete",
-    //     roles:["ADMIN"]
-    // }
 ]
 
 function matchPath(pattern: string, actual: string): boolean {
