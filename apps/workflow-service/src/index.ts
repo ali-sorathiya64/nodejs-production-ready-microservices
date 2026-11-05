@@ -18,7 +18,7 @@ app.use(express.json())
 
 
 
-app.use(requireGatewaySecret,worflowRoutes)
+app.use("/tasks",requireGatewaySecret,worflowRoutes)
 
 
 app.get("/health",(_req,res)=>{

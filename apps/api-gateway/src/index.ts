@@ -9,8 +9,6 @@ import { createProxyMiddleware,fixRequestBody } from 'http-proxy-middleware';
 import { gatewayAuth } from './middleware/gatewayAuth';
 
 
-
-
 config({path:resolve(process.cwd(),'.env' )});
 config({path:resolve(process.cwd(),  '../../.env' )});
 
@@ -21,6 +19,7 @@ const PORT = process.env.PORT || 3000;
 const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL || "http://localhost:3001"
 const TASK_SERVICE_URL = process.env.TASK_SERVICE_URL || "http://localhost:3002"
 const MEDIA_SERVICE_URL = process.env.MEDIA_SERVICE_URL || "http://localhost:3003"
+const WORKFLOW_SERVICE_URL = process.env.WORKFLOW_SERVICE_URL || "http://localhost:3004"
 
 
 
@@ -74,6 +73,18 @@ app.use("/tasks",
         pathRewrite:(path) => `/tasks${path}`,
         on:{
              proxyReq:fixRequestBody
+        }
+    })
+)
+
+app.use("/tasks",
+    gatewayAuth,
+    createProxyMiddleware({
+        target:WORKFLOW_SERVICE_URL,
+        changeOrigin:true,
+        pathRewrite:(wpath)=> `tasks${wpath}`,
+        on:{
+            proxyReq:fixRequestBody
         }
     })
 )
