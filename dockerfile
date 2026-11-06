@@ -1,0 +1,7 @@
+FROM node:24-slim
+WORKDIR /app
+COPY . .
+RUN npm ci
+ARG SERVICE
+ENV SERVICE=${SERVICE}
+CMD npm run dev -w $SERVICE
