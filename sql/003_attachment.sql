@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS attachments (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     task_id UUID NOT NULL,
@@ -7,5 +6,6 @@ CREATE TABLE IF NOT EXISTS attachments (
     uploaded_by UUID NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
 
 CREATE INDEX IF NOT EXISTS idx_attachments_task_id ON attachments(task_id)

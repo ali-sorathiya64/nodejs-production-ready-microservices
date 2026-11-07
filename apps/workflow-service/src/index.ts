@@ -21,7 +21,7 @@ app.use("/task-workflow",requireGatewaySecret,worflowRoutes)
 
 
 app.get("/health",(_req,res)=>{
-    successResponse(res ,{service:"worflow-service"})
+    successResponse(res ,{service:"Workflow-service"})
 })
 
 
@@ -32,7 +32,7 @@ next(new AppError(404,"Route not found"));
 app.use(errorHandler)
 
 
-async function initStartup(){
+const initStartup =async() =>{
     try{
 
         await startKafka();

@@ -6,4 +6,3 @@ CREATE TABLE IF NOT EXISTS users(
     role TEXT NOT NULL DEFAULT 'USER' CHECK (role in ('USER', 'ADMIN')),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 )
-

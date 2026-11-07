@@ -23,7 +23,7 @@ app.use("/task", requireGatewaySecret, taskRoute)
 
 
 app.get("/health",(_req,res)=>{
-    successResponse(res,{service:'task-service'})
+    successResponse(res,{service:'Task-Service'})
 })
 
 app.use((_req,_res,next)=>{
