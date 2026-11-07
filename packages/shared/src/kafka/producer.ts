@@ -3,7 +3,6 @@ import { createKafkaClient } from "./client";
 import { logger } from "../logger/logger";
 
 
-
 export const createProducer = async (clientId: string): Promise<Producer> => {
 
     const kafka = createKafkaClient(clientId);
@@ -17,14 +16,12 @@ export const createProducer = async (clientId: string): Promise<Producer> => {
     await producer.connect()
 
 
-
-    logger.info({ clientId }, "Kafka producer connected");
+    logger.info({ clientId }, "Kafka Producer connected");
 
     return producer;
 
 
 }
-
 
 export const publishJson = async(
     prouducer:Producer,
@@ -48,7 +45,6 @@ logger.info({topic,payload}, "Kafka event published")
 return result;
 
 }
-
 
 
 export const publishJsonSafe = async(producer:Producer | null,
