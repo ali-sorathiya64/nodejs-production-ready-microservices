@@ -61,14 +61,14 @@ export const getSingleTask = async (userId: string, role: string, id: string) =>
         task = await taskRepo.findSingleTaskById(id)
 
         if (!task) {
-            throw new AppError(404, "Task not found")
+            throw new AppError(404, "Task is not found")
         }
 
         await redis.set(taskKey(id), JSON.stringify(task), "EX", TTL)
     }
 
     if (role !== 'ADMIN' && task.created_by !== userId) {
-        throw new AppError(403, "Forbidden you dont have access")
+        throw new AppError(403, "Forbidden you don't have access")
     }
 
     return convertTaskFormat(task)
