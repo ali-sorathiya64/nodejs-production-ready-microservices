@@ -1,7 +1,7 @@
 import {config} from 'dotenv'
 import { readFileSync } from 'node:fs'
 import  {resolve} from 'node:path'
-import {closePool, getPool} from '../packages/shared/src/db/pool'
+import {getPool,closePool} from '../packages/shared/src/db/pool'
 
 
 config({path:resolve(process.cwd(), '.env' )})
