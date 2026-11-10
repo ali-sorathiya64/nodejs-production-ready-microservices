@@ -47,20 +47,23 @@ export const listTasks = async (userId: string, role: string) => {
     return tasks.map(convertTaskFormat)
 }
 
+
+
 export const getSingleTask = async (userId: string, role: string, id: string) => {
 
     let task
-    const cached = await redis.get(taskKey(id))
+            const cached = await redis.get(taskKey(id))
 
     if (cached) {
         await redis.incr("cache:hits")
         task = JSON.parse(cached)
+
     } else {
-        await redis.incr("cache:misses")
+          await redis.incr("cache:misses")
 
         task = await taskRepo.findSingleTaskById(id)
 
-        if (!task) {
+          if (!task) {
             throw new AppError(404, "Task is not found")
         }
 
@@ -68,6 +71,8 @@ export const getSingleTask = async (userId: string, role: string, id: string) =>
     }
 
     if (role !== 'ADMIN' && task.created_by !== userId) {
+
+        
         throw new AppError(403, "Forbidden you don't have access")
     }
 
@@ -108,7 +113,8 @@ export const taskDelete = async (role: string, id: string) => {
 
     await taskRepo.deleteSingleTaskById(id);
 
-    await redis.del(taskKey(id), listKey(task.created_by, "USER"), listKey(task.created_by, "ADMIN"))
+    await redis.del(taskKey(id), listKey(task.created_by, "USER"),
+     listKey(task.created_by, "ADMIN"))
 
     return { id }
 }
