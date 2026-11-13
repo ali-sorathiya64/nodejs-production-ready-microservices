@@ -20,7 +20,7 @@ const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL || "http://localhost:3001"
 const TASK_SERVICE_URL = process.env.TASK_SERVICE_URL || "http://localhost:3002"
 const MEDIA_SERVICE_URL = process.env.MEDIA_SERVICE_URL || "http://localhost:3003"
 const WORKFLOW_SERVICE_URL = process.env.WORKFLOW_SERVICE_URL || "http://localhost:3004"
-
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "http://localhost:3005"
 
 
 // secure default http headers
