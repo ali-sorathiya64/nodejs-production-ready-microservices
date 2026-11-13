@@ -49,7 +49,7 @@ export const listMedia = async(taskId:string) : Promise <Atachment[]>=>{
         `
         SELECT id, task_id, image_url, public_id, uploaded_by, created_at
         FROM attachments
-        WHERE id = $1
+        WHERE task_id = $1
         ORDER BY created_at DESC
         `,
         [taskId]

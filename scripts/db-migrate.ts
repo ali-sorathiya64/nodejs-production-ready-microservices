@@ -7,7 +7,7 @@ import {getPool,closePool} from '../packages/shared/src/db/pool'
 config({path:resolve(process.cwd(), '.env' )})
 
 const main= async()=>{
-    const file = process.argv[2] ?? "sql/004_workflows.sql"
+    const file = process.argv[2] ?? "sql/005_ai_flow.sql"
     const sql = readFileSync(resolve(process.cwd(),file), 'utf-8');
 
 
