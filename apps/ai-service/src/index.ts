@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import { resolve } from "node:path";
 import { AppError, errorHandler, httpLogger, logger, requireGatewaySecret, successResponse } from "shared";
+import aiRoutes from "./routes/ai.route";
 
 config({ path: resolve(process.cwd(), ".env") });
 config({ path: resolve(process.cwd(), "../../.env") });
@@ -17,6 +18,7 @@ app.get("/health", (_req, res) => {
 });
 
 // mount route here
+app.use("/ai", requireGatewaySecret, aiRoutes);
 
 app.use((_req, _res, next) => {
     next(new AppError(404, "Route not found"));
