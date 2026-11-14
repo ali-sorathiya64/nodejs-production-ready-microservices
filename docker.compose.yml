@@ -36,6 +36,13 @@ services:
       args:
         SERVICE: workflow-service
     env_file: .env
+  
+  ai-service:
+    build:
+      context: .
+      args:
+        SERVICE: ai-service
+    env_file: .env
 
   api-gateway:
     build:
