@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Type-check all services
+        run: |
+          for s in api-gateway auth-service task-service media-service workflow-service ai-service; do
+            echo "== $s =="
+            npx tsc --noEmit -p apps/$s
+          done
+
+  docker-build:
+    needs: typecheck
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [api-gateway, auth-service, task-service, media-service, workflow-service]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: dockerfile
+          push: false
+          build-args: SERVICE=${{ matrix.service }}
