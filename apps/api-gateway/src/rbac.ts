@@ -65,11 +65,22 @@ const rbacRules: RbacRule[] = [
         method: "GET",
         path: "/tasks/:taskId/attachments",
         roles: ["USER", "ADMIN"]
-    },{
-        method:"GET",
-        path:"/task-workflow/:taskId/workflows",
-        roles:["USER","ADMIN"]
-    }
+    }, {
+        method: "GET",
+        path: "/task-workflow/:taskId/workflows",
+        roles: ["USER", "ADMIN"]
+    },
+    {
+        method: "POST",
+        path: "/ai/tasks/:taskId/summary",
+        roles: ["USER", "ADMIN"]
+    },
+    
+    {
+        method: "GET",
+        path: "/ai/tasks/:taskId/summaries",
+        roles: ["USER", "ADMIN"]
+    },
 
 
 ]

@@ -23,7 +23,8 @@ export const createKafkaClient  =(
         logLevel: logLevel.ERROR,
 
         retry:{
-            retries:0
+            retries: 10
+
         },
 
         ...config

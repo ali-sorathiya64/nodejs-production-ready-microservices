@@ -33,6 +33,13 @@ app.use(rateLimit({
     legacyHeaders: false,
 }));
 
+const aiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 20,
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
 app.use(httpLogger);
 
 app.get("/health",(_req,res) =>{
@@ -86,6 +93,16 @@ app.use("/task-workflow",
         on:{
             proxyReq:fixRequestBody
         }
+    })
+)
+app.use("/ai",
+    aiLimiter,
+    gatewayAuth,
+    createProxyMiddleware({
+        target: AI_SERVICE_URL,
+        changeOrigin: true,
+        pathRewrite: (path) => `/ai${path}`,
+        on: { proxyReq: fixRequestBody },
     })
 )
 
