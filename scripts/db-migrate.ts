@@ -4,6 +4,7 @@ import  {resolve} from 'node:path'
 import {getPool,closePool} from '../packages/shared/src/db/pool'
 
 
+
 config({path:resolve(process.cwd(), '.env' )})
 
 const main= async()=>{
