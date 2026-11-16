@@ -2,5 +2,4 @@
 **/dist
 .git
 .env
-.env.example
 *.log 
