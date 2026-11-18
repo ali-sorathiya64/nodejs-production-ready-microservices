@@ -2,7 +2,7 @@
 
 # 🧩 TaskFlow: Event-Driven Microservices Backend
 
-**Six Node.js + TypeScript services, one secure gateway, Kafka-powered workflows, and an AI that summarizes your tasks.**
+**Six Node.js + TypeScript services, one secure gateway, Kafka-powered workflows, and an AI service that summarizes your tasks.**
 
 ![CI](https://github.com/ali-sorathiya64/nodejs-production-ready-microservices/actions/workflows/ci.yml/badge.svg)
 ![Node](https://img.shields.io/badge/Node.js-24-339933?logo=node.js&logoColor=white)
